@@ -1,0 +1,782 @@
+{
+	"info": {
+		"_postman_id": "dd6d011e-84b7-4300-afe2-29acb6d87285",
+		"name": "AUG 23 Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29080989",
+		"_collection_link": "https://restless-resonance-893193.postman.co/workspace/My-Workspace-001~0588e9cf-ebec-4427-8116-a4ca39cd8914/collection/29080989-dd6d011e-84b7-4300-afe2-29acb6d87285?action=share&source=collection_link&creator=29080989"
+	},
+	"item": [
+		{
+			"name": "/asset-types",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomstr = \"chair8\" + Math.random().toString(36).substr(2, 7);\r",
+							"pm.collectionVariables.set(\"AssetType\", randomstr);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"    "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assetType\":\"{{AssetType}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/asset-types",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"asset-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"   var responseJson = pm.response.json();\r",
+							"   pm.collectionVariables.set('extractedDeviceCode', responseJson.code);\r",
+							"//var deviceId = responseJson.id;\r",
+							"\r",
+							"// var responseJson = pm.response.json();\r",
+							"// // Store the device ID in an environment variable\r",
+							"// pm.collectionVariables.set('extractedDeviceId', responseJson.id);\r",
+							"\r",
+							"\r",
+							"// // Parse the JSON response\r",
+							"// var responseBody = pm.response.json();\r",
+							"\r",
+							"// // Extract the id value\r",
+							"// var itemId = responseBody.id;\r",
+							"\r",
+							"// // Store the id in a Postman variable for later use\r",
+							"// pm.variables.set(\"itemId\", itemId.id);\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							" \r",
+							"\r",
+							"    pm.collectionVariables.set(\"id\", jsonData.id);\r",
+							"\r",
+							"});    "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"code\":\"{{$randomPassword}}\",\r\n   \"deviceCode\":\"{{$randomCurrencyCode}}\",\r\n   \"type\":\"BOBCAT\",\r\n   \"status\":\"Ready\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/assets",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/project-types get",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/project-types",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"project-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Add projects post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"   \r",
+							"\r",
+							"\r",
+							"\r",
+							" \r",
+							"\r",
+							" \r",
+							"\r",
+							"// Parse the response JSON to get the project ID\r",
+							"\r",
+							" \r",
+							"\r",
+							"// Test: Check if the response has the correct project ID\r",
+							"\r",
+							"// Parse the response JSON\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"\r",
+							" // Store the ID in a Postman variable\r",
+							"\r",
+							"pm.collectionVariables.set(\"projectId\", responseJson.id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"var assetRequestId = responseJson.assetRequest[0].id;\r",
+							"\r",
+							"// Store the asset request ID in an environment variable\r",
+							"pm.collectionVariables.set('extractedAssetRequestId', assetRequestId);\r",
+							"\r",
+							"\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"var assetType = responseJson.assetRequest[0].assetType;\r",
+							"\r",
+							"// Store the assetType in an environment variable\r",
+							"pm.environment.set('extractedAssetType', assetType);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "text"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n \r\n\r\n    \"dcCode\": \"uua\",\r\n\r\n \r\n\r\n   \r\n\r\n    \"code\": \"{{$randomCountryCode}}\",\r\n\r\n \r\n\r\n    \"name\": \"{{$randomFirstName}}\",\r\n\r\n   \r\n\r\n \r\n\r\n    \"description\": \"\",\r\n\r\n \r\n\r\n    \"startDate\": \"2023-07-22\",\r\n\r\n \r\n\r\n    \"endDate\": \"2042-07-30\",\r\n\r\n \r\n\r\n    \"status\": \"Approved\",\r\n\r\n \r\n\r\n    \"plannedEstimateCost\": 98474894,\r\n\r\n \r\n\r\n    \"projectPriorityName\": \"MEDIUM\",\r\n\r\n \r\n\r\n    \"location\": {\r\n\r\n \r\n\r\n        \"latitude\": 123.654,\r\n\r\n \r\n\r\n        \"longitude\": 789.034\r\n\r\n \r\n\r\n    },    \"projectTypeName\": \"Government\",\r\n\r\n \r\n\r\n    \"assetRequest\": [\r\n\r\n \r\n\r\n        {\r\n\r\n \r\n\r\n            \"dcCode\": \"CSCS\",\r\n\r\n \r\n\r\n             \"assetType\": \"{{AssetType}}\",\r\n\r\n \r\n\r\n            \"numberOfAssets\": \"1\",\r\n\r\n \r\n\r\n            \"startDateTime\": \"2023-07-22T18:30:00.000Z\",\r\n\r\n \r\n\r\n            \"endDateTime\": \"2028-07-25T18:30:00.000Z\",\r\n\r\n \r\n\r\n            \"currencySymbol\": null,\r\n\r\n \r\n\r\n            \"plannedCost\":976,\r\n\r\n \r\n\r\n            \"total\": null,\r\n\r\n \r\n\r\n            \"number\": 1\r\n\r\n \r\n\r\n        }\r\n\r\n \r\n\r\n    ],\r\n\r\n \r\n\r\n    \"projectDocuments\": []\r\n\r\n \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/projects",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/project-types post",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomstr = \"SST18\" + Math.random().toString(36).substr(2, 7);\r",
+							"pm.collectionVariables.set(\"projectType\", randomstr);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"projectId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"projectType\": \"{{projectType}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/project-types",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"project-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/project-types/{id} put",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomstr = \"VST18\" + Math.random().toString(36).substr(2, 7);\r",
+							"pm.collectionVariables.set(\"projectType\", randomstr);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"projectType\":\"{{projectType}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/project-types/{{projectId}}",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"project-types",
+						"{{projectId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asset Assignment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"projectId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//             \"projectId\": 3,\r\n//             \"assetId\": 1,\r\n//             \"assetRequestId\": 4,\r\n//             \"assetType\": \"BOBCAT\",\r\n//             \"startDateTime\": \"2023-06-10\",\r\n//             \"endDateTime\": \"2023-06-11\"\r\n//         }\r\n{\r\n           \"projectId\": \"{{projectId}}\",\r\n            \"assetId\": \"{{extractedDeviceId}}\",\r\n            \"assetRequestId\": \"{{extractedAssetRequestId}}\",\r\n            \"assetType\": \"{{extractedAssetType}}\",\r\n            \"startDateTime\": \"2023-06-10\",\r\n            \"endDateTime\": \"2023-06-11\"\r\n        }\r\n\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/asset-projects",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"asset-projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Work Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check the status code is 201\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"// Parse the JSON response\r",
+							"var jsonResponse = pm.response.json();\r",
+							"\r",
+							"// Extract the workOrderId from the response\r",
+							"var workOrderId = jsonResponse.id;\r",
+							"\r",
+							"// Store the workOrderId in a collection variable\r",
+							"pm.collectionVariables.set(\"wo_id\", workOrderId);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"id\": \"\",\r\n\r\n    \"code\": \"{{$randomPhoneNumber}}\",\r\n\r\n    \"projectId\": \"481\",\r\n\r\n    \"projectName\": \"PN_23\",\r\n\r\n    \"priority\": \"HIGH\",\r\n\r\n    \"status\": \"Draft\",\r\n\r\n    \"startDate\": \"2023-07-22\",\r\n\r\n    \"endDate\": \"2030-09-25\",\r\n\r\n    \"description\": \"front-end withdrawal Open-source Car\",\r\n\r\n    \"employee\": {\r\n\r\n        \"createdBy\": \"testuser@cscs.io\",\r\n\r\n        \"createdDate\": \"2023-08-03T10:58:59.393342Z\",\r\n\r\n        \"modifiedBy\": \"testuser@cscs.io\",\r\n\r\n        \"modifiedDate\": \"2023-08-10T04:07:30.791933Z\",\r\n\r\n        \"id\": 42,\r\n\r\n        \"dcCode\": \"CSCS\",\r\n\r\n        \"code\": \"E2\",\r\n\r\n        \"firstName\": \"Eva\",\r\n\r\n        \"lastName\": \"George\",\r\n\r\n        \"email\": \"EG@cscs.io\",\r\n\r\n        \"employeeType\": \"Manager\",\r\n\r\n        \"joinDate\": null,\r\n\r\n        \"hireDate\": null,\r\n\r\n        \"birthDate\": null,\r\n\r\n        \"phoneNumber\": \"+919773368123\",\r\n\r\n        \"address\": {\r\n\r\n            \"id\": 62,\r\n\r\n            \"address1\": null,\r\n\r\n            \"address2\": null,\r\n\r\n            \"city\": null,\r\n\r\n            \"state\": null,\r\n\r\n            \"zipCode\": null,\r\n\r\n            \"country\": null\r\n\r\n        }\r\n\r\n    },\r\n\r\n    \"workorderDocuments\": [],\r\n\r\n    \"workOrderActivities\": [\r\n\r\n        {\r\n\r\n            \"id\": null,\r\n\r\n            \"dcCode\": \"CSCS\",\r\n\r\n            \"workOrderId\": \"\",\r\n\r\n            \"projectAssetId\": \"659\",\r\n\r\n            \"startDateTime\": \"2023-08-20T07:11:00.000Z\",\r\n\r\n            \"endDateTime\": \"2023-08-24T07:11:00.000Z\",\r\n\r\n            \"description\": \"Nakfa Dale District\",\r\n\r\n            \"totalHour\": \"889\",\r\n\r\n            \"activityType\": \"BA_563\",\r\n\r\n            \"location\": {\r\n\r\n                \"locationCode\": \"Expeditors International (UK) Ltd\"\r\n\r\n            },\r\n\r\n            \"status\": \"Approved\"\r\n\r\n        }\r\n\r\n    ]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/work-order",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"work-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Work Order By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "text"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/work-order/{{wo_id}}",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"work-order",
+						"{{wo_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Asset Incident",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CSCS-Authorization-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsImZpcnN0bmFtZSI6InNzdCIsIm9yZ05hbWUiOiJTU1QiLCJyb2xlcyI6IlNTVF9BRE1JTiIsInVzZXJJZCI6MTIsIm9yZ0lkIjoiMTQiLCJsYXN0bmFtZSI6InRlc3R1c2VyIiwiZ2xvYmFsT3JnQ29kZSI6Im51bGwiLCJvcmdDb2RlIjoiU1NUIiwicGVybWlzc2lvbnMiOiIiLCJ1c2VyVHlwZSI6MCwiZXhwIjoxNjkzNjI5MzYwMjE4LCJlbWFpbCI6InNzdC10ZXN0dXNlckBjc2NzLmlvIiwidXNlcm5hbWUiOiJzc3QtdGVzdHVzZXJAY3Njcy5pbyIsInZlbmRvckNvZGVzIjoiIn0.b54CQhBub0LC66k0a3FnL0KceJvjy6sXFISbT-wLX0qieWW_tdVdJdTp-3tSU1N5_rIwHzW9rLKyYj_Rq6gJKQ",
+						"type": "default"
+					},
+					{
+						"key": "DCCODE",
+						"value": "SST",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dcCode\": \"CSCS\",\r\n    \"project\": {\r\n        \"id\": \"{{projectId}}\"\r\n    },\r\n    \"asset\": {\r\n        \"code\": \"{{extractedDeviceCode}}\"\r\n    },\r\n    \"workOrder\": {\r\n        \"id\": \"{{wo_id}}\"\r\n    },\r\n    \"reportedBy\": \"\",\r\n    \"status\": \"Submitted\",\r\n    \"priority\": \"MEDIUM\",\r\n    \"location\": {\r\n        \"address1\": \"123\",\r\n        \"address2\": \"North Street\",\r\n        \"city\": \"cbe\",\r\n        \"state\": \"tn\",\r\n        \"country\": \"in\",\r\n        \"postalCode\": \"{{randomCountryCode}}\",\r\n        \"contactName\": \"{{randomFullName}}\",\r\n        \"contactPhone\": \"{{randomPhoneNumber}}\",\r\n        \"locationCode\": null\r\n    },\r\n    \"type\": \"Wheel\",\r\n    \"dateTime\": \"2023-08-11T07:06:00.000Z\",\r\n    \"description\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qa.cscs-apps.com/cam/asset-incidents",
+					"protocol": "https",
+					"host": [
+						"qa",
+						"cscs-apps",
+						"com"
+					],
+					"path": [
+						"cam",
+						"asset-incidents"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "projectType",
+			"value": ""
+		},
+		{
+			"key": "projectId",
+			"value": ""
+		},
+		{
+			"key": "assetType",
+			"value": ""
+		},
+		{
+			"key": "AssetType",
+			"value": ""
+		},
+		{
+			"key": "extractedAssetRequestId",
+			"value": ""
+		},
+		{
+			"key": "extractedDeviceId",
+			"value": ""
+		},
+		{
+			"key": "extractedId",
+			"value": ""
+		},
+		{
+			"key": "extractedDeviceCode",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "workOrderId",
+			"value": ""
+		},
+		{
+			"key": "wo_id",
+			"value": ""
+		}
+	]
+}
